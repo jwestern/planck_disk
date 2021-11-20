@@ -1,0 +1,15 @@
+[package]
+name = "planck_disk"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "planck_disk"
+crate-type = ["cdylib"]
+
+[dependencies.pyo3]
+version = "0.15.1"
+features = ["extension-module"]
+
+[build-dependencies]
+pyo3-build-config = "*"
