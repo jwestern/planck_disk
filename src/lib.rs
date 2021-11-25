@@ -64,7 +64,9 @@ fn photosphere_temperature(surface_density: f64, surface_pressure: f64, kappa: f
 /// Returns the luminosity per unit surface area (radiant flux), of a
 /// blackbody with the given temperature, over a frequency range.
 fn surface_luminosity(photosphere_temperature: f64, frequency_range: &Range<f64>) -> f64 {
-    //This is the expensive function which integrates the Planck spectrum
+    // This is the expensive function which integrates the Planck spectrum.
+    // When computing multiple bands, it's more efficient to do them all at once,
+    // because neighboring bands share an antiderivative at their mutual boundary.
     let xl = energy_ratio(frequency_range[0], photosphere_temperature);
     let xr = energy_ratio(frequency_range[1], photosphere_temperature);
     let planck_antideriv_l = planck_anti_approx(xl, NPLANCK);
